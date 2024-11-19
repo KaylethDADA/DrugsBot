@@ -1,10 +1,13 @@
-﻿namespace DrugsBot.Domain.Validators.Exceptions
+﻿namespace DrugsBot.Domain.Primitives
 {
     /// <summary>
     /// Сообщения об ошибках валидации.
     /// </summary>
-    public class ValidationMessages
+    public class ValidationMessage
     {
+        public const string RequiredField = "Поле {PropertyName} является обязательным.";
+        public const string LengthField = "Поле {PropertyName} должно содержать от {MinLength} до {MaxLength} символов.";
+
         /// <summary>
         /// Параметр имеет значение null.
         /// </summary>

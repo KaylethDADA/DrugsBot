@@ -1,12 +1,13 @@
-﻿using DrugsBot.Domain.Validators;
-using FluentValidation;
+﻿using DrugsBot.Domain.DomainEvents;
+using DrugsBot.Domain.Primitives;
+using DrugsBot.Domain.Validators;
 
 namespace DrugsBot.Domain.Entities
 {
     /// <summary>
     /// Связь между препаратом и аптекой
     /// </summary>
-    public class DrugItem : BaseEntity
+    public class DrugItem : BaseEntity<DrugItem>
     {
         /// <summary>
         /// Конструктор для инициализации
@@ -15,14 +16,14 @@ namespace DrugsBot.Domain.Entities
         /// <param name="drugStoreId"></param>
         /// <param name="cost"></param>
         /// <param name="count"></param>
-        public DrugItem(Guid drugId, Guid drugStoreId, decimal cost, int count)
+        public DrugItem(Guid drugId, Guid drugStoreId, decimal cost, double count)
         {
             DrugId = drugId;
             DrugStoreId = drugStoreId;
             Cost = cost;
             Count = count;
 
-            new DrugItemValidator().ValidateAndThrow(this);
+            ValidateEntity(new DrugItemValidator());
         }
 
 #pragma warning disable CS8618
@@ -50,9 +51,21 @@ namespace DrugsBot.Domain.Entities
         /// <summary>
         /// Количество препарата на складе.
         /// </summary>
-        public int Count { get; private set; }
+        public double Count { get; private set; }
 
         public Drug Drug { get; private set; }
         public DrugStore DrugStore { get; private set; }
+
+        /// <summary>
+        /// Обновить количество препарата на складе.
+        /// </summary>
+        /// <param name="count"></param>
+        public void UpdateCount(double count)
+        {
+            Count = count;
+
+            ValidateEntity(new DrugItemValidator());
+            AddDomainEvent(new DrugItemUpdatedEvent(this.Id, count));
+        }
     }
 }

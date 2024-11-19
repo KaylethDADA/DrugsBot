@@ -1,13 +1,13 @@
-﻿using DrugsBot.Domain.Validators;
+﻿using DrugsBot.Domain.Primitives;
+using DrugsBot.Domain.Validators;
 using DrugsBot.Domain.ValueObjects;
-using FluentValidation;
 
 namespace DrugsBot.Domain.Entities
 {
     /// <summary>
     /// Аптека.
     /// </summary>
-    public class DrugStore : BaseEntity    
+    public class DrugStore : BaseEntity<DrugStore>
     {
         /// <summary>
         /// Конструктор для инициализации
@@ -21,7 +21,7 @@ namespace DrugsBot.Domain.Entities
             Number = number;
             Address = address;
 
-            new DrugStoreValidator().ValidateAndThrow(this);
+            ValidateEntity(new DrugStoreValidator());
         }
 
 #pragma warning disable CS8618

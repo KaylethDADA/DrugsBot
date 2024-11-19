@@ -1,12 +1,12 @@
-﻿using DrugsBot.Domain.Validators;
-using FluentValidation;
+﻿using DrugsBot.Domain.Primitives;
+using DrugsBot.Domain.Validators;
 
 namespace DrugsBot.Domain.Entities
 {
     /// <summary>
     /// Лекарственный препарат
     /// </summary>
-    public class Drug : BaseEntity
+    public class Drug : BaseEntity<Drug>
     {
         /// <summary>
         /// Конструктор для инициализации
@@ -22,7 +22,7 @@ namespace DrugsBot.Domain.Entities
             CountryCodeId = countryCodeId;
             Country = country;
 
-            new DrugValidator().ValidateAndThrow(this);
+            ValidateEntity(new DrugValidator());
         }
 
 #pragma warning disable CS8618

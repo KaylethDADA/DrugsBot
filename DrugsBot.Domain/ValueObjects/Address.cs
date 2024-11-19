@@ -1,4 +1,5 @@
-﻿using DrugsBot.Domain.Validators;
+﻿using DrugsBot.Domain.Primitives;
+using DrugsBot.Domain.Validators;
 using FluentValidation;
 
 namespace DrugsBot.Domain.ValueObjects

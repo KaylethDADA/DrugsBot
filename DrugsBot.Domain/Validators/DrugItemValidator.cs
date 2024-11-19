@@ -1,5 +1,5 @@
 ﻿using DrugsBot.Domain.Entities;
-using DrugsBot.Domain.Validators.Exceptions;
+using DrugsBot.Domain.Primitives;
 using FluentValidation;
 
 namespace DrugsBot.Domain.Validators
@@ -12,11 +12,11 @@ namespace DrugsBot.Domain.Validators
         public DrugItemValidator()
         {
             RuleFor(di => di.Cost)
-                .GreaterThan(0).WithMessage(ValidationMessages.TooLowValue(nameof(DrugItem.Cost)))
-                .PrecisionScale(10, 2, true).WithMessage(ValidationMessages.InvalidFormat(nameof(DrugItem.Cost)));
+                .GreaterThan(0).WithMessage(ValidationMessage.TooLowValue(nameof(DrugItem.Cost)))
+                .PrecisionScale(10, 2, true).WithMessage(ValidationMessage.InvalidFormat(nameof(DrugItem.Cost)));
 
             RuleFor(di => di.Count)
-               .GreaterThanOrEqualTo(0).WithMessage(ValidationMessages.TooLowValue(nameof(DrugItem.Count)))
+               .GreaterThanOrEqualTo(0).WithMessage(ValidationMessage.TooLowValue(nameof(DrugItem.Count)))
                .LessThanOrEqualTo(10000);
         }
     }

@@ -1,4 +1,4 @@
-﻿using DrugsBot.Domain.Validators.Exceptions;
+﻿using DrugsBot.Domain.Primitives;
 using DrugsBot.Domain.ValueObjects;
 using FluentValidation;
 using System.Text.RegularExpressions;
@@ -13,28 +13,28 @@ namespace DrugsBot.Domain.Validators
         public AddressValidator()
         {
             RuleFor(address => address.City)
-                .NotNull().WithMessage(ValidationMessages.NullException(nameof(Address.City)))
-                .NotEmpty().WithMessage(ValidationMessages.EmptyException(nameof(Address.City)))
-                .Length(2, 50).WithMessage(ValidationMessages.InvalidFormat(nameof(Address.City)))
-                .Matches(CityRegex).WithMessage(ValidationMessages.InvalidFormat(nameof(Address.City)));
+                .NotNull().WithMessage(ValidationMessage.NullException(nameof(Address.City)))
+                .NotEmpty().WithMessage(ValidationMessage.EmptyException(nameof(Address.City)))
+                .Length(2, 50).WithMessage(ValidationMessage.InvalidFormat(nameof(Address.City)))
+                .Matches(CityRegex).WithMessage(ValidationMessage.InvalidFormat(nameof(Address.City)));
 
             RuleFor(address => address.Street)
-                .NotNull().WithMessage(ValidationMessages.NullException(nameof(Address.Street)))
-                .NotEmpty().WithMessage(ValidationMessages.EmptyException(nameof(Address.Street)))
-                .Length(3, 100).WithMessage(ValidationMessages.InvalidFormat(nameof(Address.Street)))
-                .Matches(StreetRegex).WithMessage(ValidationMessages.InvalidFormat(nameof(Address.Street)));
+                .NotNull().WithMessage(ValidationMessage.NullException(nameof(Address.Street)))
+                .NotEmpty().WithMessage(ValidationMessage.EmptyException(nameof(Address.Street)))
+                .Length(3, 100).WithMessage(ValidationMessage.InvalidFormat(nameof(Address.Street)))
+                .Matches(StreetRegex).WithMessage(ValidationMessage.InvalidFormat(nameof(Address.Street)));
 
             RuleFor(address => address.House)
-                .NotNull().WithMessage(ValidationMessages.NullException(nameof(Address.House)))
-                .NotEmpty().WithMessage(ValidationMessages.EmptyException(nameof(Address.House)))
-                .Length(1, 10).WithMessage(ValidationMessages.InvalidFormat(nameof(Address.House)))
-                .Matches(HouseRegex).WithMessage(ValidationMessages.InvalidFormat(nameof(Address.House)));
+                .NotNull().WithMessage(ValidationMessage.NullException(nameof(Address.House)))
+                .NotEmpty().WithMessage(ValidationMessage.EmptyException(nameof(Address.House)))
+                .Length(1, 10).WithMessage(ValidationMessage.InvalidFormat(nameof(Address.House)))
+                .Matches(HouseRegex).WithMessage(ValidationMessage.InvalidFormat(nameof(Address.House)));
 
             RuleFor(address => address.CountryCode)
-                .NotNull().WithMessage(ValidationMessages.NullException(nameof(Address.CountryCode)))
-                .NotEmpty().WithMessage(ValidationMessages.EmptyException(nameof(Address.CountryCode)))
-                .Length(2).WithMessage(ValidationMessages.InvalidFormat(nameof(Address.CountryCode)))
-                .Matches(CountryCodeRegex).WithMessage(ValidationMessages.InvalidFormat(nameof(Address.CountryCode)));
+                .NotNull().WithMessage(ValidationMessage.NullException(nameof(Address.CountryCode)))
+                .NotEmpty().WithMessage(ValidationMessage.EmptyException(nameof(Address.CountryCode)))
+                .Length(2).WithMessage(ValidationMessage.InvalidFormat(nameof(Address.CountryCode)))
+                .Matches(CountryCodeRegex).WithMessage(ValidationMessage.InvalidFormat(nameof(Address.CountryCode)));
         }
 
         /// <summary>

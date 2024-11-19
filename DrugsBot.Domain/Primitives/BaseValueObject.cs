@@ -1,7 +1,11 @@
-﻿using System.Reflection;
+﻿using FluentValidation;
+using System.Reflection;
 
-namespace DrugsBot.Domain.ValueObjects
+namespace DrugsBot.Domain.Primitives
 {
+    /// <summary>
+    /// Базовый класс для всех объектов значений, обеспечивающий сравнение и вычисление хеш-кода на основе всех полей и свойств.
+    /// </summary>
     public abstract class BaseValueObject : IEquatable<BaseValueObject>
     {
         /// <summary>
@@ -14,7 +18,6 @@ namespace DrugsBot.Domain.ValueObjects
             if (other == null || other.GetType() != GetType())
                 return false;
 
-            // Сравниваем все свойства
             foreach (var property in GetProperties())
             {
                 var value1 = property.GetValue(this);
@@ -23,7 +26,6 @@ namespace DrugsBot.Domain.ValueObjects
                     return false;
             }
 
-            // Сравниваем все поля
             foreach (var field in GetFields())
             {
                 var value1 = field.GetValue(this);
@@ -51,7 +53,7 @@ namespace DrugsBot.Domain.ValueObjects
         /// <returns>Хеш-код объекта.</returns>
         public override int GetHashCode()
         {
-            int hash = 17;
+            var hash = 17;
 
             foreach (var property in GetProperties())
             {
@@ -107,6 +109,17 @@ namespace DrugsBot.Domain.ValueObjects
         public static bool operator !=(BaseValueObject? left, BaseValueObject? right)
         {
             return !(left == right);
+        }
+
+
+        protected void ValidateValueObject<T>(AbstractValidator<T> validator) where T : BaseValueObject
+        {
+            var result = validator.Validate((T)this);
+
+            if (result.IsValid) return;
+
+            var errors = string.Join("; ", result.Errors.Select(e => e.ErrorMessage));
+            throw new ValidationException($"Validation failed for {typeof(T).Name}: {errors}");
         }
     }
 }

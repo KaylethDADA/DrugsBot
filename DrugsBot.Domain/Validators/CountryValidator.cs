@@ -1,5 +1,5 @@
 ﻿using DrugsBot.Domain.Entities;
-using DrugsBot.Domain.Validators.Exceptions;
+using DrugsBot.Domain.Primitives;
 using FluentValidation;
 using System.Text.RegularExpressions;
 
@@ -13,16 +13,16 @@ namespace DrugsBot.Domain.Validators
         public CountryValidator()
         {
             RuleFor(c => c.Name)
-                .NotNull().WithMessage(ValidationMessages.NullException(nameof(Country.Name)))
-                .NotEmpty().WithMessage(ValidationMessages.EmptyException(nameof(Country.Name)))
-                .Length(2, 100).WithMessage(ValidationMessages.InvalidFormat(nameof(Country.Name)))
-                .Matches(CountryNameRegex).WithMessage(ValidationMessages.InvalidFormat(nameof(Country.Name)));
+                .NotNull().WithMessage(ValidationMessage.NullException(nameof(Country.Name)))
+                .NotEmpty().WithMessage(ValidationMessage.EmptyException(nameof(Country.Name)))
+                .Length(2, 100).WithMessage(ValidationMessage.InvalidFormat(nameof(Country.Name)))
+                .Matches(CountryNameRegex).WithMessage(ValidationMessage.InvalidFormat(nameof(Country.Name)));
 
             RuleFor(c => c.CountryCode)
-                .NotNull().WithMessage(ValidationMessages.NullException(nameof(Country.CountryCode)))
-                .NotEmpty().WithMessage(ValidationMessages.EmptyException(nameof(Country.CountryCode)))
-                .Length(2).WithMessage(ValidationMessages.InvalidFormat(nameof(Country.CountryCode)))
-                .Matches(CountryCodeRegex).WithMessage(ValidationMessages.InvalidFormat(nameof(Country.CountryCode)));
+                .NotNull().WithMessage(ValidationMessage.NullException(nameof(Country.CountryCode)))
+                .NotEmpty().WithMessage(ValidationMessage.EmptyException(nameof(Country.CountryCode)))
+                .Length(2).WithMessage(ValidationMessage.InvalidFormat(nameof(Country.CountryCode)))
+                .Matches(CountryCodeRegex).WithMessage(ValidationMessage.InvalidFormat(nameof(Country.CountryCode)));
         }
 
         /// <summary>
