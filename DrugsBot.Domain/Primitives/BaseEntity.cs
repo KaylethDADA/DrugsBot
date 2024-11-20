@@ -7,6 +7,16 @@ namespace DrugsBot.Domain.Primitives
     /// </summary>
     public abstract class BaseEntity<T> where T : BaseEntity<T>
     {
+        /// <summary>
+        /// Уникальный идентификатор сущности.
+        /// </summary>
+        public Guid Id { get; protected set; }
+
+        protected BaseEntity() 
+        {
+            Id = Guid.NewGuid();
+        }
+
         protected List<IDomainEvent> DomainEvents { get; set; } = [];
 
         protected void AddDomainEvent(IDomainEvent domainEvent)
@@ -35,11 +45,6 @@ namespace DrugsBot.Domain.Primitives
         {
             return DomainEvents.AsReadOnly();
         }
-
-        /// <summary>
-        /// Уникальный идентификатор сущности.
-        /// </summary>
-        public Guid Id { get; protected set; }
 
         /// <summary>
         /// Переопределение метода для сравнения с другим объектом.
