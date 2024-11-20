@@ -25,10 +25,7 @@ namespace DrugsBot.Domain.Entities
         }
 
 #pragma warning disable CS8618
-        public DrugStore()
-        {
-            
-        }
+        public DrugStore() { }
 #pragma warning disable CS8618
 
         /// <summary>
@@ -46,6 +43,20 @@ namespace DrugsBot.Domain.Entities
         /// </summary>
         public Address Address { get; private set; }
 
+        /// <summary>
+        /// Навигационное свойство для связи с DrugItem
+        /// </summary>
         public ICollection<DrugItem> DrugItems { get; private set; } = new List<DrugItem>();
+
+        public DrugStore Update(string drugNetwork, int number, Address address)
+        {
+            DrugNetwork = drugNetwork;
+            Number = number;
+            Address = address;
+
+            ValidateEntity(new DrugStoreValidator());
+
+            return this;
+        }
     }
 }

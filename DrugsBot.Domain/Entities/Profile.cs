@@ -4,6 +4,9 @@ using DrugsBot.Domain.ValueObjects;
 
 namespace DrugsBot.Domain.Entities
 {
+    /// <summary>
+    /// Представляет профиль пользователя с внешним идентификатором и электронной почтой.
+    /// </summary>
     public class Profile : BaseEntity<Profile>
     {
         public Profile(string externalId, Email? email)
@@ -24,6 +27,9 @@ namespace DrugsBot.Domain.Entities
         /// </summary>
         public Email? Email { get; private set; }
 
+        /// <summary>
+        /// Навигационное свойство для связи с FavoriteDrug.
+        /// </summary>
         public List<FavoriteDrug> FavoriteDrugs { get; private set; } = [];
     }
 }

@@ -4,7 +4,7 @@ using DrugsBot.Domain.Validators;
 namespace DrugsBot.Domain.Entities
 {
     /// <summary>
-    /// Лекарственный препарат
+    /// Лекарственный препарат.
     /// </summary>
     public class Drug : BaseEntity<Drug>
     {
@@ -15,20 +15,17 @@ namespace DrugsBot.Domain.Entities
         /// <param name="manufacturer"></param>
         /// <param name="countryCodeId"></param>
         /// <param name="country"></param>
-        public Drug(string name, string manufacturer, string countryCodeId, Country country)
+        public Drug(string name, string manufacturer, Guid countryCodeId)
         {
             Name = name;
             Manufacturer = manufacturer;
             CountryCodeId = countryCodeId;
-            Country = country;
 
             ValidateEntity(new DrugValidator());
         }
 
 #pragma warning disable CS8618
-        public Drug()
-        {
-        }
+        public Drug() { }
 #pragma warning disable CS8618
 
         /// <summary>
@@ -44,9 +41,27 @@ namespace DrugsBot.Domain.Entities
         /// <summary>
         /// Код страны производителя.
         /// </summary>
-        public string CountryCodeId { get; private set; }
+        public Guid CountryCodeId { get; private set; }
 
+        /// <summary>
+        /// Связь с объектом Country.
+        /// </summary>
         public Country Country { get; private set; }
+
+        /// <summary>
+        /// Навигационное свойство для связи с DrugItem.
+        /// </summary>
         public ICollection<DrugItem> DrugItems { get; private set; } = new List<DrugItem>();
+
+        public Drug Update(string name, string manufacturer, Guid countryCodeId)
+        {
+            Name = name;
+            Manufacturer = manufacturer;
+            CountryCodeId = countryCodeId;
+
+            ValidateEntity(new DrugValidator());
+        
+            return this;
+        }
     }
 }

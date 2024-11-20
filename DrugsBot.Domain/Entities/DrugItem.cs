@@ -27,10 +27,7 @@ namespace DrugsBot.Domain.Entities
         }
 
 #pragma warning disable CS8618
-        public DrugItem()
-        {
-            
-        }
+        public DrugItem() { }
 #pragma warning disable CS8618
 
         /// <summary>
@@ -53,7 +50,14 @@ namespace DrugsBot.Domain.Entities
         /// </summary>
         public double Count { get; private set; }
 
+        /// <summary>
+        /// Связь с объектом Drug.
+        /// </summary>
         public Drug Drug { get; private set; }
+
+        /// <summary>
+        /// Связь с объектом DrugStore.
+        /// </summary>
         public DrugStore DrugStore { get; private set; }
 
         /// <summary>

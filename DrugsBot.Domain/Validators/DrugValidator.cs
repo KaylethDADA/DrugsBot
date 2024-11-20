@@ -23,12 +23,6 @@ namespace DrugsBot.Domain.Validators
                 .NotEmpty().WithMessage(ValidationMessage.EmptyException(nameof(Drug.Manufacturer)))
                 .Length(2, 100).WithMessage(ValidationMessage.InvalidFormat(nameof(Drug.Manufacturer)))
                 .Matches(ManufacturerRegex).WithMessage(ValidationMessage.InvalidFormat(nameof(Drug.Name)));
-
-            RuleFor(d => d.CountryCodeId)
-                .NotNull().WithMessage(ValidationMessage.NullException(nameof(Drug.CountryCodeId)))
-                .NotEmpty().WithMessage(ValidationMessage.EmptyException(nameof(Drug.CountryCodeId)))
-                .Length(2).WithMessage(ValidationMessage.InvalidFormat(nameof(Drug.CountryCodeId)))
-                .Matches(CountryCodeIdRegex).WithMessage(ValidationMessage.InvalidFormat(nameof(Drug.CountryCodeId)));
         }
 
         /// <summary>
@@ -40,10 +34,5 @@ namespace DrugsBot.Domain.Validators
         /// Регулярное выражение для проверки корректности производителя.
         /// </summary>
         public static Regex ManufacturerRegex = new Regex(@"^[A-Za-zА-Яа-яёЁ\s\.-]+$");
-
-        /// <summary>
-        /// Регулярное выражение для проверки корректности кода страны.
-        /// </summary>
-        public static Regex CountryCodeIdRegex = new Regex(@"^[A-Za-z]+$");
     }
 }
