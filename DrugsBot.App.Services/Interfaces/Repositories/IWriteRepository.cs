@@ -4,7 +4,7 @@
     /// Интерфейс репозитория для операций записи.
     /// </summary>
     /// <typeparam name="T">Тип сущности, с которой работает репозиторий.</typeparam>
-    public interface IWrirteRepository<T> where T : class
+    public interface IWriteRepository<T> where T : class
     {
         /// <summary>
         /// Репозиторий для операций чтения.
