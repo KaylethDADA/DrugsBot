@@ -16,7 +16,6 @@ namespace DrugsBot.Domain.ValueObjects
         {
             Value = value;
 
-            // Вызов валидации для электронной почты.
             ValidateValueObject(new EmailValidator());
         }
 

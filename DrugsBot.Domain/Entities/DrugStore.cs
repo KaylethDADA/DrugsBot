@@ -48,6 +48,13 @@ namespace DrugsBot.Domain.Entities
         /// </summary>
         public ICollection<DrugItem> DrugItems { get; private set; } = new List<DrugItem>();
 
+        /// <summary>
+        /// Обновить основные параметры сущности DrugStore.
+        /// </summary>
+        /// <param name="drugNetwork">Сеть аптек.</param>
+        /// <param name="number">Номер аптеки.</param>
+        /// <param name="address">Адрес аптеки.</param>
+        /// <returns>Обновленный объект аптеки.</returns>
         public DrugStore Update(string drugNetwork, int number, Address address)
         {
             DrugNetwork = drugNetwork;

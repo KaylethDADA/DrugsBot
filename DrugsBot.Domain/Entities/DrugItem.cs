@@ -61,9 +61,28 @@ namespace DrugsBot.Domain.Entities
         public DrugStore DrugStore { get; private set; }
 
         /// <summary>
+        /// Обновить основные параметры сущности DrugItem.
+        /// </summary>
+        /// <param name="drugId">Идентификатор препарата.</param>
+        /// <param name="drugStoreId">Идентификатор аптеки.</param>
+        /// <param name="cost">Стоимость препарата.</param>
+        /// <param name="count">Количество препарата.</param>
+        /// <returns>Обновлённый объект DrugItem.</returns>
+        public DrugItem Update(Guid drugId, Guid drugStoreId, decimal cost, double count)
+        {
+            DrugId = DrugId;
+            DrugStoreId = drugStoreId;
+            Cost = cost;
+            UpdateCount(count);
+
+            ValidateEntity(new DrugItemValidator());
+            return this;
+        }
+
+        /// <summary>
         /// Обновить количество препарата на складе.
         /// </summary>
-        /// <param name="count"></param>
+        /// <param name="count">Количество препарата.</param>
         public void UpdateCount(double count)
         {
             Count = count;

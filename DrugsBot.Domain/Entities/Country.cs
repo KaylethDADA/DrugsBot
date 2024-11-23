@@ -41,6 +41,12 @@ namespace DrugsBot.Domain.Entities
         /// </summary>
         public ICollection<Drug> Drugs { get; private set; } = new List<Drug>();
 
+        /// <summary>
+        /// Обновить основные параметры сущности Country.
+        /// </summary>
+        /// <param name="name">Название страны.</param>
+        /// <param name="code">Код страны.</param>
+        /// <returns>Обновленный объект Country.</returns>
         public Country Update(string name, string code)
         {
             Name = name;

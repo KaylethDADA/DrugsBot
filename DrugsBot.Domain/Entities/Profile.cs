@@ -17,6 +17,10 @@ namespace DrugsBot.Domain.Entities
             ValidateEntity(new ProfileValidator());
         }
 
+#pragma warning disable CS8618
+        public Profile() { }
+#pragma warning disable CS8618
+
         /// <summary>
         /// Внешний идентификатор.
         /// </summary>
@@ -30,6 +34,20 @@ namespace DrugsBot.Domain.Entities
         /// <summary>
         /// Навигационное свойство для связи с FavoriteDrug.
         /// </summary>
-        public List<FavoriteDrug> FavoriteDrugs { get; private set; } = [];
+        public List<FavoriteDrug> FavoriteDrugs { get; private set; } = new List<FavoriteDrug>();
+
+        /// <summary>
+        /// Обновить основные параметры сущности Profile.
+        /// </summary>
+        /// <param name="externalId">Внешний идентификатор.</param>
+        /// <param name="email">Электронная почта.</param>
+        /// <returns></returns>
+        public Profile Update(Guid externalId, Email? email)
+        {
+            ExternalId = ExternalId;
+            Email = email;
+
+            return this;
+        }
     }
 }
