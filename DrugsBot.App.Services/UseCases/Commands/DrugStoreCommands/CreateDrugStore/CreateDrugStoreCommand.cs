@@ -6,5 +6,5 @@ namespace DrugsBot.App.Services.UseCases.Commands.DrugStoreCommands.CreateDrugSt
     /// <summary>
     /// Команда для создания аптеки.
     /// </summary>
-    public sealed record CreateDrugStoreCommand(string DrugNetwork, int Number, CreateAddressRequest Address) : ICommand;
+    public sealed record CreateDrugStoreCommand(string DrugNetwork, int Number, AddressRequest Address) : ICommand;
 }

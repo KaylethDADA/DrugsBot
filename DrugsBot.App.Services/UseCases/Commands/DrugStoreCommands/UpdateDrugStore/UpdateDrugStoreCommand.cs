@@ -6,5 +6,5 @@ namespace DrugsBot.App.Services.UseCases.Commands.DrugStoreCommands.UpdateDrugSt
     /// <summary>
     /// Команда для обновления информации об аптеке.
     /// </summary>
-    public sealed record UpdateDrugStoreCommand(Guid Id, string DrugNetwork, int Number, UpdateAddressRequest Address) : ICommand;
+    public sealed record UpdateDrugStoreCommand(Guid Id, string DrugNetwork, int Number, AddressRequest Address) : ICommand;
 }
