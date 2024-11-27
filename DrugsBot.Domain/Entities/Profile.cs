@@ -43,9 +43,9 @@ public class Profile : BaseEntity<Profile>
     /// <param name="externalId">Внешний идентификатор.</param>
     /// <param name="email">Электронная почта.</param>
     /// <returns></returns>
-    public Profile Update(Guid externalId, Email? email)
+    public Profile Update(string externalId, Email? email)
     {
-        ExternalId = ExternalId;
+        ExternalId = externalId;
         Email = email;
 
         return this;

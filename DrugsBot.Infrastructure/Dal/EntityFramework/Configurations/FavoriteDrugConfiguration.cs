@@ -9,9 +9,8 @@ public class FavoriteDrugConfiguration : IEntityTypeConfiguration<FavoriteDrug>
     public void Configure(EntityTypeBuilder<FavoriteDrug> builder)
     {
         builder.ToTable(nameof(FavoriteDrug));
-        
-        builder.HasIndex(f => new { f.ProfileId, f.DrugId })
-            .IsUnique();
+
+        builder.HasKey(x => new { x.DrugId, x.ProfileId });
         
         builder.Property(f => f.ProfileId)
             .IsRequired();
