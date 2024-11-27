@@ -2,16 +2,15 @@
 using DrugsBot.Domain.Primitives;
 using FluentValidation;
 
-namespace DrugsBot.Domain.Validators
+namespace DrugsBot.Domain.Validators;
+
+public class ProfileValidator : AbstractValidator<Profile>
 {
-    public class ProfileValidator : AbstractValidator<Profile>
+    public ProfileValidator()
     {
-        public ProfileValidator()
-        {
-            // Валидация для ExternalId (внешнего идентификатора)
-            RuleFor(d => d.ExternalId)
-                .NotEmpty().WithMessage(ValidationMessage.RequiredField)
-                .Length(2, 100).WithMessage(ValidationMessage.LengthField);
-        }
+        // Валидация для ExternalId (внешнего идентификатора)
+        RuleFor(d => d.ExternalId)
+            .NotEmpty().WithMessage(ValidationMessage.RequiredField)
+            .Length(2, 100).WithMessage(ValidationMessage.LengthField);
     }
 }

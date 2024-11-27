@@ -1,38 +1,37 @@
 ﻿using DrugsBot.App.Services.Interfaces.CommandComponents;
 using DrugsBot.App.Services.Interfaces.Repositories.DrugReadRepositories;
 
-namespace DrugsBot.App.Services.UseCases.Commands.FavoriteDrugCommands.DeleteFavoriteDrug
+namespace DrugsBot.App.Services.UseCases.Commands.FavoriteDrugCommands.DeleteFavoriteDrug;
+
+/// <summary>
+/// Обработчик команды для удаления избранного препарата.
+/// </summary>
+public class DeleteFavoriteDrugCommandHandler : ICommandHandler<DeleteFavoriteDrugCommand>
 {
+    private readonly IFavoriteDrugWriteRepository _favoriteDrugRepository;
+
     /// <summary>
-    /// Обработчик команды для удаления избранного препарата.
+    /// 
     /// </summary>
-    public class DeleteFavoriteDrugCommandHandler : ICommandHandler<DeleteFavoriteDrugCommand>
+    /// <param name="favoriteDrugRepository"></param>
+    public DeleteFavoriteDrugCommandHandler(IFavoriteDrugWriteRepository favoriteDrugRepository)
     {
-        private readonly IFavoriteDrugWriteRepository _favoriteDrugRepository;
+        _favoriteDrugRepository = favoriteDrugRepository;
+    }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="favoriteDrugRepository"></param>
-        public DeleteFavoriteDrugCommandHandler(IFavoriteDrugWriteRepository favoriteDrugRepository)
-        {
-            _favoriteDrugRepository = favoriteDrugRepository;
-        }
+    /// <summary>
+    /// Обрабатывает команду для удаления избранного препарата.
+    /// </summary>
+    /// <param name="command">Команда для удаления избранного препарата.</param>
+    /// <param name="cancellationToken">Токен отмены операции.</param>
+    /// <returns>Задача, представляющая асинхронную операцию.</returns>
+    public async Task Handle(DeleteFavoriteDrugCommand command, CancellationToken cancellationToken)
+    {
+        var favoriteDrug = await _favoriteDrugRepository.ReadRepository.GetByIdAsync(command.Id, cancellationToken);
 
-        /// <summary>
-        /// Обрабатывает команду для удаления избранного препарата.
-        /// </summary>
-        /// <param name="command">Команда для удаления избранного препарата.</param>
-        /// <param name="cancellationToken">Токен отмены операции.</param>
-        /// <returns>Задача, представляющая асинхронную операцию.</returns>
-        public async Task Handle(DeleteFavoriteDrugCommand command, CancellationToken cancellationToken)
-        {
-            var favoriteDrug = await _favoriteDrugRepository.ReadRepository.GetByIdAsync(command.Id, cancellationToken);
+        if (favoriteDrug == null)
+            throw new KeyNotFoundException($"FavoriteDrug with ID {command.Id} not found.");
 
-            if (favoriteDrug == null)
-                throw new KeyNotFoundException($"FavoriteDrug with ID {command.Id} not found.");
-
-            await _favoriteDrugRepository.DeleteAsync(command.Id, cancellationToken);
-        }
+        await _favoriteDrugRepository.DeleteAsync(command.Id, cancellationToken);
     }
 }

@@ -7,30 +7,30 @@ services:
       context: .
       dockerfile: DrugsBot.Infrastructure.API/Dockerfile
     depends_on:
-       - postgres_db
+      - postgres_db
     environment:
-       - ASPNETCORE_ENVIRONMENT=Development
-       - ASPNETCORE_HTTP_PORTS=8080
-       - ASPNETCORE_HTTPS_PORTS=8081
-       - ConnectionStrings__DefaultConnection=User ID=postgres;Password=1488;Host=postgres_db;Port=5432;Database=DrugBotDb;
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - ASPNETCORE_HTTPS_PORTS=8081
+      - ConnectionStrings__DefaultConnection=User ID=postgres;Password=1488;Host=postgres_db;Port=5432;Database=DrugBotDb;
     ports:
-       - "8080:8080"
-       - "8081:8081"
+      - "8080:8080"
+      - "8081:8081"
     volumes:
-       - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
-       - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
+      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
 
   postgres_db:
-     container_name: DexDbContainer
-     image: postgres:latest
-     environment:
-        - POSTGRES_USER=postgres
-        - POSTGRES_PASSWORD=1488
-        - POSTGRES_DB=DrugBotDb
-     ports:
-        - "5432:5432"
-     volumes:
-        - postgres_data:/var/lib/postgresql/data
+    container_name: DexDbContainer
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=1488
+      - POSTGRES_DB=DrugBotDb
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
 
 volumes:
   postgres_data:

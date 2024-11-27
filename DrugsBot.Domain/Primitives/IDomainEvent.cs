@@ -1,8 +1,7 @@
 ﻿using MediatR;
 
-namespace DrugsBot.Domain.Primitives
+namespace DrugsBot.Domain.Primitives;
+
+public interface IDomainEvent : INotification
 {
-    public interface IDomainEvent : INotification
-    {
-    }
 }

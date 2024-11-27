@@ -1,15 +1,14 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace DrugsBot.Domain.Primitives
+namespace DrugsBot.Domain.Primitives;
+
+/// <summary>
+/// Регулярные паттерны
+/// </summary>
+public static class RegexPatterns
 {
     /// <summary>
-    /// Регулярные паттерны
+    /// Регулярка для валидации почты
     /// </summary>
-    public static class RegexPatterns
-    {
-        /// <summary>
-        /// Регулярка для валидации почты
-        /// </summary>
-        public static readonly Regex EmailRegexPattern = new(@"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$");
-    }
+    public static readonly Regex EmailRegexPattern = new(@"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$");
 }
