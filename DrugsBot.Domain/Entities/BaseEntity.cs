@@ -1,6 +1,8 @@
-﻿using FluentValidation;
+﻿using DrugsBot.Domain.Interfaces;
+using DrugsBot.Domain.Primitives;
+using FluentValidation;
 
-namespace DrugsBot.Domain.Primitives;
+namespace DrugsBot.Domain.Entities;
 
 /// <summary>
 /// Базовый класс для всех сущностей домена, обеспечивающий сравнение по идентификатору.

@@ -1,7 +1,7 @@
-﻿using FluentValidation;
-using System.Reflection;
+﻿using System.Reflection;
+using FluentValidation;
 
-namespace DrugsBot.Domain.Primitives;
+namespace DrugsBot.Domain.ValueObjects;
 
 /// <summary>
 /// Базовый класс для всех объектов значений, обеспечивающий сравнение и вычисление хеш-кода на основе всех полей и свойств.

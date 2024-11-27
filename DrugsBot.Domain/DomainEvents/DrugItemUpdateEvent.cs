@@ -1,4 +1,5 @@
-﻿using DrugsBot.Domain.Primitives;
+﻿using DrugsBot.Domain.Interfaces;
+using DrugsBot.Domain.Primitives;
 
 namespace DrugsBot.Domain.DomainEvents;
 

@@ -35,7 +35,7 @@ public class UpdateProfileCommandHandler : ICommandHandler<UpdateProfileCommand>
 
         var email = request.Email != null ? new Email(request.Email.Address) : null;
 
-        profile.Update(request.ExternalId, email);
+        profile.Update(request.ExternalId.ToString(), email);
 
         await _writeRepository.UpdateAsync(profile, cancellationToken);
     }

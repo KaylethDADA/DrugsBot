@@ -14,7 +14,6 @@ public class Drug : BaseEntity<Drug>
     /// <param name="name"></param>
     /// <param name="manufacturer"></param>
     /// <param name="countryCodeId"></param>
-    /// <param name="country"></param>
     public Drug(string name, string manufacturer, Guid countryCodeId)
     {
         Name = name;
