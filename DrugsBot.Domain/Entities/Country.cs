@@ -1,5 +1,4 @@
-﻿using DrugsBot.Domain.Primitives;
-using DrugsBot.Domain.Validators;
+﻿using DrugsBot.Domain.Validators;
 
 namespace DrugsBot.Domain.Entities;
 

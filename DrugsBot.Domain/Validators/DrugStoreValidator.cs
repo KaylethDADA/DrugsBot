@@ -12,16 +12,16 @@ public class DrugStoreValidator : AbstractValidator<DrugStore>
     public DrugStoreValidator()
     {
         RuleFor(ds => ds.DrugNetwork)
-            .NotNull().WithMessage(ValidationMessage.NullException(nameof(DrugStore.DrugNetwork)))
-            .NotEmpty().WithMessage(ValidationMessage.EmptyException(nameof(DrugStore.DrugNetwork)))
-            .Length(2, 100).WithMessage(ValidationMessage.InvalidFormat(nameof(DrugStore.DrugNetwork)));
+            .NotNull().WithMessage(ValidationMessage.RequiredField)
+            .NotEmpty().WithMessage(ValidationMessage.RequiredField)
+            .Length(2, 100).WithMessage(ValidationMessage.LengthField);
 
         RuleFor(ds => ds.Number)
-            .GreaterThan(0).WithMessage(ValidationMessage.TooLowValue(nameof(DrugStore.Number)));
+            .GreaterThan(0).WithMessage(ValidationMessage.PositiveNumber);
 
         RuleFor(ds => ds.Address)
-            .NotNull().WithMessage(ValidationMessage.NullException(nameof(DrugStore.Address)))
-            .NotEmpty().WithMessage(ValidationMessage.EmptyException(nameof(DrugStore.Address)))
+            .NotNull().WithMessage(ValidationMessage.RequiredField)
+            .NotEmpty().WithMessage(ValidationMessage.RequiredField)
             .SetValidator(new AddressValidator());
     }
 }
