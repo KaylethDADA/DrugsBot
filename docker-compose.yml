@@ -1,17 +1,16 @@
 version: '3.8'
 
 services:
-  drugsbot.infrastructure.api:
-    image: ${DOCKER_REGISTRY-}drugsbotinfrastructureapi
+  drugsbot.infrastructure:
+    image: ${DOCKER_REGISTRY-}drugsbotinfrastructure
     build:
       context: .
-      dockerfile: DrugsBot.Infrastructure.API/Dockerfile
+      dockerfile: DrugsBot.Infrastructure/Dockerfile
     depends_on:
       - postgres_db
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8080
-      - ASPNETCORE_HTTPS_PORTS=8081
       - ConnectionStrings__DefaultConnection=User ID=postgres;Password=1488;Host=postgres_db;Port=5432;Database=DrugBotDb;
     ports:
       - "8080:8080"
