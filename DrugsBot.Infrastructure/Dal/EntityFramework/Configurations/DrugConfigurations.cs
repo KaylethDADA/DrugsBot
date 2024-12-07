@@ -12,7 +12,7 @@ public class DrugConfigurations : IEntityTypeConfiguration<Drug>
 
         builder.HasKey(x => x.Id);
 
-        //TODO: добавть подгруску из drug в HasAnnotation название.
+        //TODO: добавить подгрузку из drug в HasAnnotation xml комментария.
         builder.Property(x => x.Name)
             .IsRequired()
             .HasMaxLength(150);

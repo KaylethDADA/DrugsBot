@@ -1,6 +1,8 @@
 ﻿using System.Reflection;
 using DrugsBot.Domain.Entities;
+using DrugsBot.Infrastructure.Dal.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 namespace DrugsBot.Infrastructure.Dal.EntityFramework;
 
@@ -9,9 +11,11 @@ namespace DrugsBot.Infrastructure.Dal.EntityFramework;
 /// </summary>
 public class DrugBotDbContext : DbContext
 {
-    public DrugBotDbContext(DbContextOptions<DrugBotDbContext> options)
-        : base(options)
+    private readonly DataBaseSettings _options;
+
+    public DrugBotDbContext(IOptions<DataBaseSettings> options)
     {
+        _options = options.Value;
     }
 
     public DbSet<Country> Countries { get; set; }
@@ -25,5 +29,13 @@ public class DrugBotDbContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+    }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.UseNpgsql(_options.ConnectionStrings, options =>
+        {
+            options.CommandTimeout(_options.CommandTimeout);
+        });
     }
 }
