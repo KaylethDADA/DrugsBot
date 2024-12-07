@@ -1,12 +1,21 @@
-using DrugsBot.Infrastructure.Dal;
 using DrugsBot.Infrastructure.Dal.EntityFramework;
+using DrugsBot.Infrastructure.Dal.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<DrugBotDbContext>(options =>
-    options.UseNpgsql(connectionString));
+builder.Services.Configure<DataBaseSettings>(builder.Configuration.GetSection(nameof(DataBaseSettings)));
+
+builder.Services.AddDbContext<DrugBotDbContext>((serviceProvider, options) =>
+{
+    var dataBaseSettings = serviceProvider.GetRequiredService<IOptions<DataBaseSettings>>().Value;
+    
+    options.UseNpgsql(dataBaseSettings.ConnectionStrings, npgsqlOptions =>
+    {
+        npgsqlOptions.CommandTimeout(dataBaseSettings.CommandTimeout);
+    });
+});
 
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
